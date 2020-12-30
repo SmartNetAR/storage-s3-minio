@@ -1,0 +1,41 @@
+version: '3.5'
+
+services:
+  node:
+    container_name: storage_node_1
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /usr/app
+    entrypoint: bash dev.build.sh
+    volumes:
+     - .:/usr/app:cached
+    ports:
+      - 8089:8089
+    networks:
+     - storagenet
+
+  s3:
+    container_name: storage_s3_1
+    restart: always
+    image: minio/minio
+    ports:
+      - 9000:9000
+    environment:
+      MINIO_ACCESS_KEY: AKIAIOSFODNN7EXAMPLE
+      MINIO_SECRET_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+    volumes:
+      - s3:/data
+    networks:
+      - storagenet
+    command: server /data
+
+
+networks:
+  storagenet:
+    driver: "bridge"
+
+volumes:
+  s3:
+    driver: "local"
