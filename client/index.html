@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+</head>
+
+<body>
+    <div>
+        <label for="file-name">Select File</label><br>
+        <input type="file" id="image-file"><br><br>
+    </div>
+    <label for="file-name">File Name</label><br>
+    <input type="text" id="file-name"><br><br>
+    <button type="button" id="presignedButton">Get presigned</button><br><br>
+    <button type="button" id="uploadButton">Upload</button><br>
+    <p id="presignedUrl"></p>
+
+    <script src="./api.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
